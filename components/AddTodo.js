@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Keyboard } from "react-native";
 import { Flex, Stack, TextInput, Button } from "@react-native-material/core";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -16,6 +17,7 @@ export default function AddTodo({ setTodos }) {
         ...todo,
       ]);
       setText("");
+      Keyboard.dismiss();
     }
   };
 

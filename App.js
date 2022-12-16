@@ -21,7 +21,7 @@ export default function App() {
       <StatusBar style="auto" />
       <Header />
       <AddTodo setTodos={setTodos} />
-      <ListTodo todo={todos} setTodo={setTodos} />
+      <ListTodo todos={todos} setTodos={setTodos} />
     </SafeAreaView>
   );
 }

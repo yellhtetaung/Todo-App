@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { StyleSheet, FlatList, Dimensions, Alert } from "react-native";
 import { Flex, ListItem, Text } from "@react-native-material/core";
-import { Checkbox } from "react-native-paper";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 const { height } = Dimensions.get("screen");
 
-export default function ListTodo({ todo, setTodo }) {
+export default function ListTodo({ todos, setTodos }) {
   const longPress = (id) => {
     Alert.alert("Delete", "Are you sure?", [
       {
         text: "Delete",
         onPress: () => {
-          setTodo((todo) => todo.filter((key) => key.id != id));
+          setTodos((todo) => todo.filter((key) => key.id != id));
         },
       },
       { text: "Cancel" },
@@ -19,19 +19,21 @@ export default function ListTodo({ todo, setTodo }) {
   };
 
   const pressCheck = (item) => {
-    const data = todo;
+    const data = todos;
     data.map((key) => {
       if (key.id === item.id) {
         return (key.complete = true);
       }
     });
-    setTodo(data);
+    setTodos(data);
   };
+
+  console.log(todos);
 
   return (
     <Flex h={height / 1.6} mt={20} ph={20}>
       <FlatList
-        data={todo}
+        data={todos}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ListItem
@@ -44,13 +46,16 @@ export default function ListTodo({ todo, setTodo }) {
               </Text>
             }
             leading={
-              <Checkbox
-                disabled={item.complete ? true : false}
-                status={item.complete ? "checked" : "unchecked"}
-                onPress={() => pressCheck(item)}
+              <Icon
+                name={
+                  item.complete ? "checkbox-marked" : "checkbox-blank-outline"
+                }
+                size={25}
+                color="#3F0071"
               />
             }
             onLongPress={() => longPress(item.id)}
+            onPress={() => pressCheck(item)}
           />
         )}
       />
@@ -60,9 +65,11 @@ export default function ListTodo({ todo, setTodo }) {
 
 const styles = StyleSheet.create({
   completed: {
+    fontSize: 18,
     textDecorationLine: "line-through",
   },
   unCompleted: {
+    fontSize: 18,
     textDecorationLine: "none",
   },
 });
