@@ -37,7 +37,7 @@ export default function ListTodo({ todo, setTodo }) {
           <ListItem
             title={
               <Text
-                variant="h6"
+                variant="subtitle1"
                 style={item.complete ? styles.completed : styles.unCompleted}
               >
                 {item.item}
@@ -47,10 +47,7 @@ export default function ListTodo({ todo, setTodo }) {
               <Checkbox
                 disabled={item.complete ? true : false}
                 status={item.complete ? "checked" : "unchecked"}
-                onPress={() => {
-                  pressCheck(item);
-                  console.log(todo);
-                }}
+                onPress={() => pressCheck(item)}
               />
             }
             onLongPress={() => longPress(item.id)}
