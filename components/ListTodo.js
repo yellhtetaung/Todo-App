@@ -19,12 +19,13 @@ export default function ListTodo({ todo, setTodo }) {
   };
 
   const pressCheck = (item) => {
-    todo.map((key) => {
+    const data = todo;
+    data.map((key) => {
       if (key.id === item.id) {
         return (key.complete = true);
       }
     });
-    setTodo(todo);
+    setTodo(data);
   };
 
   return (
